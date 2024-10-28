@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #CCCCFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        .post-form, .post {
+            background-color: #6495ED;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post-form input, .post-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .post-form button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .post h3 {
+            margin: 0;
+            color: #333;
+        }
+        .post p {
+            margin: 5px 0;
+        }
+        .post small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Formulario para crear un nuevo post -->
+    <div class="post-form">
+        <h2>Crear un nuevo post</h2>
+        <input type="text" id="username" placeholder="Nombre" required>
+        <input type="text" id="title" placeholder="Título" required>
+        <textarea id="message" placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
+        <button onclick="addPost()">Publicar</button>
+    </div>
+
+    <!-- Contenedor para los posts -->
+    <div id="posts-container"></div>
+</div>
+
+<script>
+    function addPost() {
+        const username = document.getElementById("username").value;
+        const title = document.getElementById("title").value;
+        const message = document.getElementById("message").value;
+
+        if (username && title && message) {
+            const postContainer = document.getElementById("posts-container");
+
+            const post = document.createElement("div");
+            post.className = "post";
+
+            post.innerHTML = `
+                <h3>${title}</h3>
+                <p>${message}</p>
+                <small>Publicado por: ${username}</small>
+            `;
+
+          
+            postContainer.prepend(post);
+
+         
+            document.getElementById("username").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("message").value = "";
+        } else {
+            alert("Por favor, completa todos los campos.");
+        }
+    }
+</script>
+
+</body>
+</html>
